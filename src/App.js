@@ -8,7 +8,8 @@ import './App.css';
 
 function App() {
   const [course, setCourses] = useState(null);
-  const [loading,setLoading]= useState(true);
+  const [loading, setLoading] = useState(true);
+  const [category,setCategory] = useState(filterData[0].title);
   /* 
   every render i baad call kregga
   useEffect(()=>{
@@ -53,17 +54,20 @@ function App() {
     fetchData();
   }, []);
   return (
-    <div className="App">  
+    <div className="App">
       <div>
         <NavBar>
         </NavBar>
       </div>
-      <div>
-        <Filter filterData={filterData}>
-        </Filter>
-      </div>
-      <div className='courses'>
-        {loading ? (<Spinner/>) : (<Courses course={course}></Courses>)}
+      <div className='r-body'>
+        <div>
+          <Filter filterData={filterData}
+          category={category} setCategory={setCategory}>
+          </Filter>
+        </div>
+        <div className='courses'>
+          {loading ? (<Spinner />) : (<Courses course={course} category={category}></Courses>)}
+        </div>
       </div>
     </div>
   );

@@ -1,9 +1,13 @@
-function Filter ({filterData}) {
+function Filter ({filterData,category,setCategory}) {
+    function filterHandler(title){
+        setCategory(title);
+    }
     return(
         <div className="filter">
             {filterData.map((data)=>{
-                return(<button className="btn-fil" key={data.id}>
-                    {data.title};
+                const active = data.title===category? "active" : "";
+                return(<button onClick={()=>filterHandler(data.title)} className={`btn-fil${active}`} key={data.id}>
+                    {data.title}
                 </button>)
             })}
         </div>
